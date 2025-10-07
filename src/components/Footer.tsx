@@ -1,4 +1,4 @@
-import { Instagram, Facebook } from "lucide-react";
+import { Instagram } from "lucide-react";
 import logo from "@/assets/gym-denia-logo.png";
 
 const Footer = () => {
@@ -11,25 +11,16 @@ const Footer = () => {
             <img src={logo} alt="Gym Dénia" className="h-16 w-auto mx-auto" />
           </div>
 
-          {/* Social Icons */}
+          {/* Social Icons - Solo Instagram */}
           <div className="flex justify-center gap-6 mb-8">
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/gym_denia/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-12 h-12 rounded-full border-2 border-border hover:border-primary flex items-center justify-center transition-all hover:scale-110 hover:shadow-[0_0_20px_hsl(var(--spartan-lime)/0.5)]"
               aria-label="Instagram"
             >
               <Instagram className="w-6 h-6 text-foreground hover:text-primary" />
-            </a>
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full border-2 border-border hover:border-primary flex items-center justify-center transition-all hover:scale-110 hover:shadow-[0_0_20px_hsl(var(--spartan-lime)/0.5)]"
-              aria-label="Facebook"
-            >
-              <Facebook className="w-6 h-6 text-foreground hover:text-primary" />
             </a>
           </div>
 

@@ -8,9 +8,9 @@ const Navigation = () => {
 
   const navItems = [
     { label: "Inicio", href: "#hero" },
-    { label: "Horarios", href: "#horarios" },
-    { label: "Precios", href: "#precios" },
-    { label: "Galería", href: "#galeria" },
+    { label: "Galería", href: "#galeria" }, // ← Movido aquí
+    { label: "Precios", href: "#precios" }, // ← Movido aquí
+    { label: "Horarios", href: "#horarios" }, // ← Movido aquí
     { label: "Contacto", href: "#contacto" },
   ];
 
@@ -35,12 +35,12 @@ const Navigation = () => {
           </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-10">
             {navItems.map((item) => (
               <button
                 key={item.label}
                 onClick={() => scrollToSection(item.href)}
-                className="text-foreground hover:text-primary transition-colors font-display uppercase text-sm tracking-wider"
+                className="text-foreground hover:text-primary transition-colors font-body text-base font-medium"
               >
                 {item.label}
               </button>
@@ -67,7 +67,7 @@ const Navigation = () => {
                 <button
                   key={item.label}
                   onClick={() => scrollToSection(item.href)}
-                  className="text-foreground hover:text-primary transition-colors font-display uppercase text-sm tracking-wider text-left"
+                  className="text-foreground hover:text-primary transition-colors font-body text-base font-medium text-left py-2"
                 >
                   {item.label}
                 </button>

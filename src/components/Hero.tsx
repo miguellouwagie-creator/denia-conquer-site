@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/gym-denia-logo.png";
+import { ArrowRight } from "lucide-react";
 
 const Hero = () => {
   const scrollToContact = () => {
@@ -12,50 +13,67 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center relative bg-gradient-to-b from-background via-background to-secondary"
+      className="min-h-screen flex items-center justify-center relative bg-gradient-to-b from-background via-background to-secondary px-4 py-8"
     >
-      {/* Subtle texture overlay */}
-      <div className="absolute inset-0 opacity-5 bg-[radial-gradient(circle_at_50%_50%,_hsl(var(--spartan-lime))_1px,_transparent_1px)] bg-[length:30px_30px]" />
+      {/* Textura de fondo más visible */}
+      <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(circle_at_50%_50%,_hsl(var(--spartan-lime))_1px,_transparent_1px)] bg-[length:30px_30px]" />
 
-      <div className="container mx-auto px-4 text-center relative z-10">
-        {/* Logo */}
+      {/* Gradiente radial para profundidad */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,_hsl(var(--spartan-lime)/0.1)_0%,_transparent_50%)]" />
+
+      <div className="container mx-auto text-center relative z-10 max-w-5xl">
+        {/* Logo más pequeño */}
         <div className="mb-8 animate-scale-in">
           <img
             src={logo}
-            alt="Gym Dénia Logo"
-            className="mx-auto h-48 w-auto drop-shadow-[0_0_40px_hsl(var(--spartan-lime)/0.5)]"
+            alt="Gym Dénia"
+            className="mx-auto w-32 sm:w-36 md:w-40 h-auto drop-shadow-[0_0_30px_hsl(var(--spartan-lime)/0.4)]"
           />
         </div>
 
-        {/* Main Headline */}
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-display mb-6 text-shadow-lime animate-fade-in">
-          <span className="text-primary">Forja Tu Cuerpo.</span>
-          <br />
-          <span className="text-foreground">Conquista Tus Límites.</span>
+        {/* Headline más grande y impactante */}
+        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display mb-8 animate-fade-in leading-tight">
+          <span className="text-primary block mb-2">FORJA TU CUERPO</span>
+          <span className="text-foreground block text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+            Conquista Tus Límites
+          </span>
         </h1>
 
-        {/* Subheadline */}
-        <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto font-body animate-fade-in">
-          Entrenamiento de élite en el corazón de Dénia. Donde los guerreros se forjan.
-        </p>
+        {/* Subheadline mejorado - más grande, más legible, mejor espaciado */}
+        <div className="mb-10 animate-fade-in">
+          <p className="text-xl sm:text-2xl md:text-3xl text-foreground font-display font-medium mb-3 tracking-wide">
+            Entrenamiento de élite en Dénia
+          </p>
+          <p className="text-base sm:text-lg md:text-xl text-primary font-body font-semibold">
+            Sin cuotas de alta • Sin permanencia
+          </p>
+        </div>
 
-        {/* CTA Button */}
-        <div className="animate-scale-in">
+        {/* Botones mejorados con dos opciones */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-scale-in">
           <Button
             variant="hero"
             size="lg"
             onClick={scrollToContact}
-            className="text-xl px-12 py-6 h-auto"
+            className="text-xl sm:text-2xl px-10 py-7 h-auto group"
           >
-            Prueba Gratuita
+            Reserva tu Visita
+            <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
           </Button>
         </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-primary rounded-full flex items-start justify-center p-2">
-          <div className="w-1 h-3 bg-primary rounded-full" />
+        {/* Badge de valor añadido - SIN "Desde 8€/día" */}
+        <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm sm:text-base animate-fade-in">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+            <span className="text-muted-foreground">Abierto 7 días</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+            <span className="text-muted-foreground">
+              Equipamiento profesional
+            </span>
+          </div>
         </div>
       </div>
     </section>
