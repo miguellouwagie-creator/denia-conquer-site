@@ -13,7 +13,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center relative bg-gradient-to-b from-background via-background to-secondary px-4 py-8"
+      className="min-h-screen flex items-center justify-center relative bg-gradient-to-b from-background via-background to-secondary px-4 pt-24 pb-8"
     >
       {/* Textura de fondo más visible */}
       <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(circle_at_50%_50%,_hsl(var(--spartan-lime))_1px,_transparent_1px)] bg-[length:30px_30px]" />
