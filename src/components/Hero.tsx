@@ -39,11 +39,8 @@ const Hero = () => {
           </span>
         </h1>
 
-        {/* Subheadline mejorado - más grande, más legible, mejor espaciado */}
+        {/* Subheadline mejorado - sin "Entrenamiento de élite en Dénia" */}
         <div className="mb-10 animate-fade-in">
-          <p className="text-xl sm:text-2xl md:text-3xl text-foreground font-display font-medium mb-3 tracking-wide">
-            Entrenamiento de élite en Dénia
-          </p>
           <p className="text-base sm:text-lg md:text-xl text-primary font-body font-semibold">
             Sin cuotas de alta • Sin permanencia
           </p>
@@ -57,7 +54,7 @@ const Hero = () => {
             onClick={scrollToContact}
             className="text-xl sm:text-2xl px-10 py-7 h-auto group"
           >
-            Reserva tu Visita
+            Agenda tu Visita
             <ArrowRight className="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
           </Button>
         </div>

@@ -73,15 +73,14 @@ const Gallery = () => {
               ¿Te gusta lo que ves?
             </h3>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Ven a probarlo en persona. La primera visita es gratis y sin
-              compromiso.
+              Ven a conocer nuestras instalaciones.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="#contacto"
                 className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-display text-lg rounded-lg hover:bg-primary/90 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_hsl(var(--spartan-lime)/0.5)]"
               >
-                Agenda tu Primera Visita
+                Contacta con Nosotros
               </a>
               <a
                 href="#precios"
