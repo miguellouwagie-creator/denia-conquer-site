@@ -1,4 +1,4 @@
-import { Dumbbell, Zap, Users } from "lucide-react";
+import { Dumbbell, Zap } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 const About = () => {
@@ -6,8 +6,7 @@ const About = () => {
     {
       icon: Dumbbell,
       title: "Musculación",
-      description:
-        "Equipamiento profesional y programas de fuerza personalizados",
+      description: "Equipamiento de calidad",
       gradient: "from-primary/20 via-primary/10 to-transparent",
       iconBg: "bg-primary/20",
       borderColor: "border-primary/40",
@@ -22,15 +21,6 @@ const About = () => {
       iconBg: "bg-yellow-500/20",
       borderColor: "border-yellow-500/40",
       glowColor: "group-hover:shadow-[0_0_40px_rgba(234,179,8,0.3)]",
-    },
-    {
-      icon: Users,
-      title: "Coaching Personal",
-      description: "Entrenadores certificados para alcanzar tus objetivos",
-      gradient: "from-blue-500/20 via-blue-500/10 to-transparent",
-      iconBg: "bg-blue-500/20",
-      borderColor: "border-blue-500/40",
-      glowColor: "group-hover:shadow-[0_0_40px_rgba(59,130,246,0.3)]",
     },
   ];
 
@@ -58,46 +48,46 @@ const About = () => {
           </p>
         </div>
 
-        {/* Cards mejoradas con efectos modernos */}
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* Cards centradas, simétricas y rectangulares */}
+        <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
               <Card
                 key={index}
-                className={`relative group border-2 ${feature.borderColor} bg-card overflow-hidden hover:scale-105 transition-all duration-500 ${feature.glowColor}`}
+                className={`relative group border-2 ${feature.borderColor} bg-card overflow-hidden hover:scale-105 transition-all duration-500 ${feature.glowColor} h-64 flex items-center`}
               >
                 {/* Gradiente de fondo animado */}
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
                 />
 
-                <CardContent className="p-8 relative z-10 text-center">
+                <CardContent className="p-6 relative z-10 text-center w-full">
                   {/* Icono con efecto glow y animación */}
-                  <div className="mb-6 flex justify-center">
+                  <div className="mb-4 flex justify-center">
                     <div
-                      className={`w-20 h-20 ${feature.iconBg} rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 relative`}
+                      className={`w-16 h-16 ${feature.iconBg} rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 relative`}
                     >
                       <div className="absolute inset-0 bg-primary/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       <Icon
-                        className="w-10 h-10 text-primary relative z-10"
+                        className="w-8 h-8 text-primary relative z-10"
                         strokeWidth={2.5}
                       />
                     </div>
                   </div>
 
                   {/* Título con mejor tipografía */}
-                  <h3 className="font-display text-2xl text-primary mb-4 tracking-wide group-hover:text-foreground transition-colors duration-300">
+                  <h3 className="font-display text-xl text-primary mb-3 tracking-wide group-hover:text-foreground transition-colors duration-300">
                     {feature.title}
                   </h3>
 
                   {/* Descripción */}
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
                     {feature.description}
                   </p>
 
                   {/* Línea decorativa animada */}
-                  <div className="mt-6 h-1 bg-gradient-to-r from-primary/50 via-primary to-primary/50 transform origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+                  <div className="mt-4 h-1 bg-gradient-to-r from-primary/50 via-primary to-primary/50 transform origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
                 </CardContent>
 
                 {/* Corner accent decorativo */}
