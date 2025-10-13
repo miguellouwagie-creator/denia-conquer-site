@@ -1,9 +1,12 @@
-import photo1 from "@/assets/Photo1.jpg";
-import photo2 from "@/assets/Photo2.jpg";
-import photo3 from "@/assets/Photo3.jpg";
-import photo4 from "@/assets/Photo4.jpg";
-import photo5 from "@/assets/Photo5.jpg";
-import photo6 from "@/assets/Photo6.jpg";
+import photo1 from "@/assets/3.1.png";
+import photo2 from "@/assets/3.2.png";
+import photo3 from "@/assets/3.3.png";
+import photo4 from "@/assets/3.4.png";
+import photo5 from "@/assets/3.5.png";
+import photo6 from "@/assets/3.6.png";
+import photo7 from "@/assets/3.7.png";
+import photo8 from "@/assets/3.8.png";
+import photo9 from "@/assets/3.9.png";
 import { Eye } from "lucide-react";
 
 const Gallery = () => {
@@ -14,6 +17,9 @@ const Gallery = () => {
     { src: photo4, alt: "Área funcional Gym Dénia" },
     { src: photo5, alt: "Espacio de entrenamiento Gym Dénia" },
     { src: photo6, alt: "Instalaciones completas Gym Dénia" },
+    { src: photo7, alt: "Zona de musculación Gym Dénia" },
+    { src: photo8, alt: "Área de entrenamiento funcional Gym Dénia" },
+    { src: photo9, alt: "Vista general instalaciones Gym Dénia" },
   ];
 
   return (
