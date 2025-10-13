@@ -39,7 +39,7 @@ const Gallery = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {images.map((image, index) => (
             <div
               key={index}
@@ -63,33 +63,6 @@ const Gallery = () => {
               <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100" />
             </div>
           ))}
-        </div>
-
-        {/* CTA Section */}
-        <div className="relative max-w-4xl mx-auto bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 rounded-2xl p-10 border-2 border-primary/30 overflow-hidden">
-          <div className="absolute inset-0 opacity-5 bg-[radial-gradient(circle_at_50%_50%,_hsl(var(--spartan-lime))_2px,_transparent_2px)] bg-[length:30px_30px]" />
-          <div className="relative z-10 text-center">
-            <h3 className="font-display text-3xl md:text-4xl text-foreground mb-4 tracking-wide">
-              ¿Te gusta lo que ves?
-            </h3>
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Ven a conocer nuestras instalaciones.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="#contacto"
-                className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-display text-lg rounded-lg hover:bg-primary/90 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_hsl(var(--spartan-lime)/0.5)]"
-              >
-                Contacta con Nosotros
-              </a>
-              <a
-                href="#precios"
-                className="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-primary text-primary font-display text-lg rounded-lg hover:bg-primary/10 transition-all duration-300 hover:scale-105"
-              >
-                Ver Tarifas
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </section>
