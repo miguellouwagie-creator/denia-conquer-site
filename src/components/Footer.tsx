@@ -1,5 +1,5 @@
 import { Instagram } from "lucide-react";
-import logo from "@/assets/gym-denia-logo.png";
+// La línea 'import logo from ...' ha sido eliminada. Ya no es necesaria.
 
 const Footer = () => {
   return (
@@ -8,7 +8,15 @@ const Footer = () => {
         <div className="text-center">
           {/* Logo */}
           <div className="mb-6">
-            <img src={logo} alt="Gym Dénia" className="h-16 w-auto mx-auto" />
+            {/* CAMBIO CRÍTICO AQUÍ:
+              Antes: src={logo} (usando una variable importada)
+              Ahora: src="/gym-denia-logo.png" (usando la ruta pública estática)
+            */}
+            <img
+              src="/gym-denia-logo.png"
+              alt="Gym Dénia"
+              className="h-16 w-auto mx-auto"
+            />
           </div>
 
           {/* Social Icons - Solo Instagram */}

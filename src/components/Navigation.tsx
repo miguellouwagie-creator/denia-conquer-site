@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/gym-denia-logo.png";
+// La línea 'import logo from ...' se elimina correctamente.
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
     { label: "Inicio", href: "#hero" },
-    { label: "Galería", href: "#galeria" }, // ← Movido aquí
-    { label: "Precios", href: "#precios" }, // ← Movido aquí
-    { label: "Horarios", href: "#horarios" }, // ← Movido aquí
+    { label: "Galería", href: "#galeria" },
+    { label: "Precios", href: "#precios" },
+    { label: "Horarios", href: "#horarios" },
     { label: "Contacto", href: "#contacto" },
   ];
 
@@ -26,12 +26,16 @@ const Navigation = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+          {/* Logo (con la ruta corregida) */}
           <button
             onClick={() => scrollToSection("#hero")}
             className="flex items-center gap-2 hover:opacity-80 transition-opacity"
           >
-            <img src={logo} alt="Gym Dénia" className="h-10 w-auto" />
+            <img
+              src="/gym-denia-logo.png"
+              alt="Gym Dénia"
+              className="h-10 w-auto"
+            />
           </button>
 
           {/* Desktop Navigation */}

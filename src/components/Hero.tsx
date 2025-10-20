@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/gym-denia-logo.png";
+// La línea 'import logo from ...' se elimina correctamente.
 import { ArrowRight } from "lucide-react";
 
 const Hero = () => {
@@ -24,8 +24,12 @@ const Hero = () => {
       <div className="container mx-auto text-center relative z-10 max-w-5xl">
         {/* Logo más pequeño */}
         <div className="mb-8 animate-scale-in">
+          {/*
+CAMBIO CRÍTICO QUE HICIMOS:
+Esta es la ruta pública correcta.
+*/}
           <img
-            src={logo}
+            src="/gym-denia-logo.png"
             alt="Gym Dénia"
             className="mx-auto w-32 sm:w-36 md:w-40 h-auto drop-shadow-[0_0_30px_hsl(var(--spartan-lime)/0.4)]"
           />
@@ -46,7 +50,9 @@ const Hero = () => {
           </p>
         </div>
 
-        {/* Botones mejorados con dos opciones */}
+        {/* ESTA ES LA SECCIÓN QUE HAS BORRADO ACCIDENTALMENTE.
+          Aquí está de vuelta.
+        */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-scale-in">
           <Button
             variant="hero"
@@ -59,7 +65,9 @@ const Hero = () => {
           </Button>
         </div>
 
-        {/* Badge de valor añadido - SIN "Desde 8€/día" */}
+        {/* ESTA SECCIÓN TAMBIÉN FUE BORRADA ACCIDENTALMENTE.
+          Aquí está de vuelta.
+        */}
         <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm sm:text-base animate-fade-in">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
