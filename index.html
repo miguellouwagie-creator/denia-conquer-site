@@ -3,43 +3,47 @@
   <head>
     <meta charset="UTF-8" />
 
-    <!-- Favicons con cache busting -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" />
+    <!-- Favicons con timestamp único para iPhone -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=20251021" />
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="/favicon-16x16.png?v=2"
+      href="/favicon-16x16.png?v=20251021"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="/favicon-32x32.png?v=2"
+      href="/favicon-32x32.png?v=20251021"
     />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="/apple-touch-icon.png?v=2"
+      href="/apple-touch-icon.png?v=20251021"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="192x192"
-      href="/android-chrome-192x192.png?v=2"
+      href="/android-chrome-192x192.png?v=20251021"
     />
     <link
       rel="icon"
       type="image/png"
       sizes="512x512"
-      href="/android-chrome-512x512.png?v=2"
+      href="/android-chrome-512x512.png?v=20251021"
     />
-    <link rel="manifest" href="/site.webmanifest?v=2" />
+    <link rel="manifest" href="/site.webmanifest?v=20251021" />
+
+    <!-- Meta para forzar actualización en iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Gym Dénia" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- SEO -->
     <title>Gym Dénia - Forja Tu Cuerpo. Conquista Tus Límites</title>
     <meta
       name="description"
@@ -52,13 +56,11 @@
     <meta name="author" content="Gym Dénia" />
     <meta name="robots" content="index, follow" />
 
-    <!-- Geolocalización -->
     <meta name="geo.region" content="ES-A" />
     <meta name="geo.placename" content="Dénia" />
     <meta name="geo.position" content="38.839847;0.104028" />
     <meta name="ICBM" content="38.839847, 0.104028" />
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
@@ -75,7 +77,6 @@
     <meta property="og:url" content="https://gymdenia.com" />
     <meta property="og:locale" content="es_ES" />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@gymdenia" />
     <meta
@@ -91,7 +92,6 @@
       content="https://gymdenia.com/android-chrome-512x512.png"
     />
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
