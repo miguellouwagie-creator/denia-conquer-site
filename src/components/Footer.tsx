@@ -1,17 +1,12 @@
 import { Instagram } from "lucide-react";
-// La línea 'import logo from ...' ha sido eliminada. Ya no es necesaria.
 
 const Footer = () => {
   return (
-    <footer className="bg-background border-t border-border py-12">
+    <footer className="bg-background border-t border-border py-12 relative">
       <div className="container mx-auto px-4">
         <div className="text-center">
           {/* Logo */}
           <div className="mb-6">
-            {/* CAMBIO CRÍTICO AQUÍ:
-              Antes: src={logo} (usando una variable importada)
-              Ahora: src="/gym-denia-logo.png" (usando la ruta pública estática)
-            */}
             <img
               src="/gym-denia-logo.png"
               alt="Gym Dénia"
@@ -36,6 +31,18 @@ const Footer = () => {
           <p className="text-muted-foreground text-sm">
             © 2025 Gym Dénia. Todos los derechos reservados.
           </p>
+        </div>
+
+        {/* Footer Credit - Studio Pixelens */}
+        <div className="absolute bottom-4 right-4">
+          <a
+            href="https://studiopixelens.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Diseñado por Studio Pixelens
+          </a>
         </div>
       </div>
     </footer>
