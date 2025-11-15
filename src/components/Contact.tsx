@@ -1,73 +1,58 @@
 import { useState } from "react";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox"; // Asegúrate de tener este componente UI
+import { Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast"; // O usa "@/components/ui/use-toast" según tu estructura
 
 const Contact = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     message: "",
   });
-
-  // Función para sanitizar input
-  const sanitizeInput = (input: string): string => {
-    return input
-      .replace(/[<>]/g, "") // Eliminar < y >
-      .replace(/javascript:/gi, "") // Eliminar javascript:
-      .replace(/on\w+=/gi, "") // Eliminar event handlers
-      .trim()
-      .slice(0, 500); // Limitar longitud
-  };
-
-  // Validar teléfono
-  const validatePhone = (phone: string): boolean => {
-    if (!phone) return true; // Opcional
-    const phoneRegex = /^[\d\s\+\-\(\)]{6,20}$/;
-    return phoneRegex.test(phone);
-  };
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Sanitizar todos los inputs
-    const sanitizedName = sanitizeInput(formData.name);
-    const sanitizedPhone = sanitizeInput(formData.phone);
-    const sanitizedMessage = sanitizeInput(formData.message);
-
-    // Validar teléfono
-    if (formData.phone && !validatePhone(sanitizedPhone)) {
-      alert("Por favor, introduce un número de teléfono válido");
+    if (!termsAccepted) {
+      toast({
+        title: "Atención",
+        description:
+          "Debes aceptar la política de privacidad para enviar el mensaje.",
+        variant: "destructive",
+      });
       return;
     }
 
-    // Validar longitud mínima
-    if (sanitizedName.length < 2) {
-      alert("El nombre debe tener al menos 2 caracteres");
-      return;
-    }
+    setIsSubmitting(true);
 
-    if (sanitizedMessage.length < 10) {
-      alert("El mensaje debe tener al menos 10 caracteres");
-      return;
-    }
-
-    // Crear mensaje de WhatsApp con datos sanitizados
-    const whatsappMessage = `Hola, me llamo ${encodeURIComponent(sanitizedName)}.%0A%0A${encodeURIComponent(sanitizedMessage)}${sanitizedPhone ? `%0A%0AMi teléfono: ${encodeURIComponent(sanitizedPhone)}` : ""}`;
-
+    // Crear mensaje
+    const whatsappMessage = `Hola, soy ${formData.name}.%0A%0A${formData.message}${formData.phone ? `%0A%0AMi teléfono: ${formData.phone}` : ""}`;
     const whatsappNumber = "34647802493";
 
-    // Abrir WhatsApp con seguridad
-    window.open(
-      `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`,
-      "_blank",
-      "noopener,noreferrer",
-    );
+    setTimeout(() => {
+      window.open(
+        `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`,
+        "_blank",
+        "noopener,noreferrer",
+      );
 
-    // Limpiar formulario
-    setFormData({ name: "", phone: "", message: "" });
+      setFormData({ name: "", phone: "", message: "" });
+      setTermsAccepted(false);
+      setIsSubmitting(false);
+
+      toast({
+        title: "Redirigiendo a WhatsApp",
+        description: "Gracias por contactar con Gym Dénia.",
+      });
+    }, 1000);
   };
 
   return (
@@ -83,35 +68,27 @@ const Contact = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          {/* Mapa */}
           <div className="relative h-[400px] md:h-auto rounded-lg overflow-hidden border-2 border-primary/30">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3060.1892764392!2d0.10183897659914373!3d38.83984795359814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5fbdd8f8d8b8d1%3A0x8d8b8d8b8d8b8d8b!2sAv.%20Juan%20Chab%C3%A1s%2C%205%2C%2003700%20D%C3%A9nia%2C%20Alicante!5e0!3m2!1ses!2ses!4v1696684800000!5m2!1ses!2ses"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3109.674376675708!2d0.0989509765459822!3d38.83602597173556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x129e1b3a00000001%3A0x0!2zMzjCsDUwJzA5LjciTiAwwrAwNSc1Ni4yIkU!5e0!3m2!1ses!2ses!4v1700000000000"
               width="100%"
               height="100%"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
               title="Ubicación Gym Dénia"
             />
           </div>
 
+          {/* Formulario */}
           <div>
-            <div className="mb-6 text-center p-3 bg-primary/5 border border-primary/20 rounded-lg">
-              <p className="text-sm text-muted-foreground">
-                📱{" "}
-                <span className="text-primary font-semibold">
-                  Atención personalizada
-                </span>{" "}
-                · Contáctanos para coordinar tu primera visita
-              </p>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-6 mb-8">
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-6 mb-8 bg-background/50 p-6 rounded-xl border border-primary/10"
+            >
               <div>
-                <Label htmlFor="name" className="text-foreground">
-                  Nombre
-                </Label>
+                <Label htmlFor="name">Nombre</Label>
                 <Input
                   id="name"
                   value={formData.name}
@@ -119,18 +96,13 @@ const Contact = () => {
                     setFormData({ ...formData, name: e.target.value })
                   }
                   required
-                  maxLength={100}
-                  minLength={2}
-                  className="mt-2 bg-background border-border focus:border-primary"
+                  className="mt-2"
                   placeholder="Tu nombre"
-                  autoComplete="name"
                 />
               </div>
 
               <div>
-                <Label htmlFor="phone" className="text-foreground">
-                  Teléfono (opcional)
-                </Label>
+                <Label htmlFor="phone">Teléfono (opcional)</Label>
                 <Input
                   id="phone"
                   type="tel"
@@ -138,17 +110,13 @@ const Contact = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, phone: e.target.value })
                   }
-                  maxLength={20}
-                  className="mt-2 bg-background border-border focus:border-primary"
+                  className="mt-2"
                   placeholder="+34 600 000 000"
-                  autoComplete="tel"
                 />
               </div>
 
               <div>
-                <Label htmlFor="message" className="text-foreground">
-                  Mensaje
-                </Label>
+                <Label htmlFor="message">Mensaje</Label>
                 <Textarea
                   id="message"
                   value={formData.message}
@@ -157,56 +125,72 @@ const Contact = () => {
                   }
                   required
                   rows={4}
-                  maxLength={500}
-                  minLength={10}
-                  className="mt-2 bg-background border-border focus:border-primary resize-none"
-                  placeholder="Cuéntanos qué te interesa..."
+                  className="mt-2 resize-none"
+                  placeholder="Cuéntanos tus objetivos..."
                 />
               </div>
 
-              <Button type="submit" variant="hero" size="lg" className="w-full">
-                Enviar por WhatsApp
+              {/* CHECKBOX LEGAL OBLIGATORIO */}
+              <div className="flex items-start space-x-3 p-3 rounded-lg border border-border bg-background/50">
+                <Checkbox
+                  id="terms"
+                  checked={termsAccepted}
+                  onCheckedChange={(checked) =>
+                    setTermsAccepted(checked as boolean)
+                  }
+                  className="mt-1"
+                />
+                <Label
+                  htmlFor="terms"
+                  className="text-sm font-normal text-muted-foreground leading-snug cursor-pointer"
+                >
+                  He leído y acepto la{" "}
+                  <Link
+                    to="/privacidad"
+                    target="_blank"
+                    className="text-primary hover:underline"
+                  >
+                    política de privacidad
+                  </Link>
+                  . Entiendo que mis datos se usarán para responder a mi
+                  consulta.
+                </Label>
+              </div>
+
+              <Button
+                type="submit"
+                variant="hero"
+                size="lg"
+                className="w-full"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  "Enviar Mensaje"
+                )}
               </Button>
             </form>
 
             <div className="space-y-4 pt-8 border-t border-border">
-              <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                <div>
-                  <p className="font-display text-primary">Dirección</p>
-                  <p className="text-muted-foreground">Av. Juan Chabás, 5</p>
-                  <p className="text-muted-foreground">03700 Dénia, Alicante</p>
-                </div>
+              <div className="flex items-center gap-3 text-muted-foreground">
+                <MapPin className="w-5 h-5 text-primary" />
+                <span>Av. Juan Chabás, 5, 03700 Dénia</span>
               </div>
-
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 text-muted-foreground">
                 <Phone className="w-5 h-5 text-primary" />
-                <div>
-                  <p className="font-display text-primary">
-                    Teléfono / WhatsApp
-                  </p>
-                  <a
-                    href="https://wa.me/34647802493"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    +34 647 80 24 93
-                  </a>
-                </div>
+                <a href="tel:+34647802493" className="hover:text-primary">
+                  +34 647 80 24 93
+                </a>
               </div>
-
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 text-muted-foreground">
                 <Mail className="w-5 h-5 text-primary" />
-                <div>
-                  <p className="font-display text-primary">Email</p>
-                  <a
-                    href="mailto:gymdenia@gmail.com"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    gymdenia@gmail.com
-                  </a>
-                </div>
+                <a
+                  href="mailto:gymdenia@gmail.com"
+                  className="hover:text-primary"
+                >
+                  gymdenia@gmail.com
+                </a>
               </div>
             </div>
           </div>
