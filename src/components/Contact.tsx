@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox"; // Asegúrate de tener este componente UI
+import { Checkbox } from "@/components/ui/checkbox";
 import { Link } from "react-router-dom";
-import { useToast } from "@/hooks/use-toast"; // O usa "@/components/ui/use-toast" según tu estructura
+import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -33,7 +33,7 @@ const Contact = () => {
 
     setIsSubmitting(true);
 
-    // Crear mensaje
+    // Crear mensaje para WhatsApp
     const whatsappMessage = `Hola, soy ${formData.name}.%0A%0A${formData.message}${formData.phone ? `%0A%0AMi teléfono: ${formData.phone}` : ""}`;
     const whatsappNumber = "34647802493";
 
@@ -68,10 +68,10 @@ const Contact = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Mapa */}
+          {/* Mapa Corregido */}
           <div className="relative h-[400px] md:h-auto rounded-lg overflow-hidden border-2 border-primary/30">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3109.674376675708!2d0.0989509765459822!3d38.83602597173556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x129e1b3a00000001%3A0x0!2zMzjCsDUwJzA5LjciTiAwwrAwNSc1Ni4yIkU!5e0!3m2!1ses!2ses!4v1700000000000"
+              src="https://maps.google.com/maps?q=Av.+Juan+Chab%C3%A1s,+5,+03700+D%C3%A9nia&t=&z=15&ie=UTF8&iwloc=&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -130,7 +130,7 @@ const Contact = () => {
                 />
               </div>
 
-              {/* CHECKBOX LEGAL OBLIGATORIO */}
+              {/* CHECKBOX LEGAL */}
               <div className="flex items-start space-x-3 p-3 rounded-lg border border-border bg-background/50">
                 <Checkbox
                   id="terms"
