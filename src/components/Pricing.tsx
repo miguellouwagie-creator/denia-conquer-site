@@ -12,37 +12,37 @@ const Pricing = () => {
   const plans = [
     {
       name: "Por Día",
-      price: "8",
+      price: "10", // Cambiado de "8" a "10"
       period: "día",
       description: "Perfecto para probar o entrenar ocasionalmente",
       highlighted: false,
     },
     {
       name: "Semanal",
-      price: "17",
+      price: "20", // Cambiado de "17" a "20"
       period: "semana",
       description: "Ideal para estancias cortas o turistas",
       highlighted: false,
     },
     {
       name: "Fin de Semana",
-      price: "20",
+      price: "23", // Cambiado de "20" a "23"
       period: "mes",
       description: "Solo sábados y domingos",
       highlighted: false,
     },
     {
       name: "Mensual",
-      price: "30",
+      price: "33", // Cambiado de "30" a "33"
       period: "mes",
       description: "Acceso ilimitado sin permanencia",
       highlighted: true,
     },
     {
       name: "Trimestral",
-      price: "81",
+      price: "90", // Cambiado de "81" a "90"
       period: "trimestre",
-      description: "27€/mes • Ahorra 9€ al trimestre",
+      description: "30€/mes • Ahorra 9€ al trimestre", // Actualizado el cálculo (33*3=99, 99-90=9€ ahorro)
       highlighted: false,
       badge: "Ahorra 9€",
     },
@@ -51,17 +51,25 @@ const Pricing = () => {
   const specialPlans = [
     {
       name: "Menores de 18 años",
-      price: "27",
+      price: "30", // Cambiado de "27" a "30"
       period: "mes",
       icon: "🎓",
       description: "Tarifa especial estudiantes",
     },
     {
       name: "Pack Familia",
-      price: "27",
+      price: "30", // Cambiado de "27" a "30"
       period: "mes/persona",
       icon: "👨‍👩‍👧‍👦",
       description: "Precio por persona en familia",
+    },
+    // Añadir este bloque nuevo para Jubilados:
+    {
+      name: "Jubilados",
+      price: "30",
+      period: "mes",
+      icon: "🧓",
+      description: "Tarifa especial jubilados",
     },
   ];
 
@@ -197,11 +205,13 @@ const Pricing = () => {
           <h3 className="text-3xl font-display text-center mb-8 text-foreground drop-shadow-[0_0_10px_hsl(var(--spartan-lime)/0.3)]">
             Tarifas Especiales
           </h3>
-          <div className="grid md:grid-cols-2 gap-6">
+          {/* CAMBIO AQUÍ: flex y justify-center para centrar el último elemento */}
+          <div className="flex flex-wrap justify-center gap-6">
             {specialPlans.map((plan, index) => (
               <Card
                 key={index}
-                className="border-2 border-primary/30 bg-card hover:border-primary transition-all"
+                // CAMBIO AQUÍ: Añadido w-full y el cálculo de ancho para mantener el diseño de 2 columnas
+                className="border-2 border-primary/30 bg-card hover:border-primary transition-all w-full md:w-[calc(50%-12px)]"
               >
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4 mb-4">
