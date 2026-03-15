@@ -3,11 +3,15 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import compression from "vite-plugin-compression";
 
+const isReplit = Boolean(process.env.REPL_ID || process.env.REPLIT_CLUSTER);
+
 export default defineConfig({
   server: {
-    host: "0.0.0.0", // Obligatorio para Replit
+    // host 0.0.0.0 only when running on Replit; localhost otherwise
+    host: isReplit ? "0.0.0.0" : "localhost",
     port: 8080,
-    allowedHosts: true,
+    // allowedHosts: true is a security risk — only enable on Replit
+    allowedHosts: isReplit ? true : ["localhost"],
   },
   plugins: [
     react(),
