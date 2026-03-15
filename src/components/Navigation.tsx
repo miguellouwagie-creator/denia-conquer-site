@@ -1,24 +1,33 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-// La línea 'import logo from ...' se elimina correctamente.
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const navItems = [
     { label: "Inicio", href: "#hero" },
-    { label: "Galería", href: "#galeria" },
+    { label: "Galer\u00eda", href: "#galeria" },
     { label: "Precios", href: "#precios" },
     { label: "Horarios", href: "#horarios" },
     { label: "Contacto", href: "#contacto" },
   ];
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false);
+  const handleNavClick = (href: string) => {
+    setIsOpen(false);
+    const isHome = location.pathname === "/";
+
+    if (isHome) {
+      // Already on home — just scroll to the section
+      const element = document.querySelector(href);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // On a legal page — navigate to home with the hash so the browser
+      // scrolls to the right section after the page loads
+      navigate("/" + href);
     }
   };
 
@@ -26,14 +35,14 @@ const Navigation = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo (con la ruta corregida) */}
+          {/* Logo */}
           <button
-            onClick={() => scrollToSection("#hero")}
+            onClick={() => handleNavClick("#hero")}
             className="flex items-center gap-2 hover:opacity-80 transition-opacity"
           >
             <img
               src="/gym-denia-logo.png"
-              alt="Gym Dénia"
+              alt="Gym D\u00e9nia"
               className="h-10 w-auto"
             />
           </button>
@@ -43,7 +52,7 @@ const Navigation = () => {
             {navItems.map((item) => (
               <button
                 key={item.label}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => handleNavClick(item.href)}
                 className="text-foreground hover:text-primary transition-colors font-body text-base font-medium"
               >
                 {item.label}
@@ -70,7 +79,7 @@ const Navigation = () => {
               {navItems.map((item) => (
                 <button
                   key={item.label}
-                  onClick={() => scrollToSection(item.href)}
+                  onClick={() => handleNavClick(item.href)}
                   className="text-foreground hover:text-primary transition-colors font-body text-base font-medium text-left py-2"
                 >
                   {item.label}
