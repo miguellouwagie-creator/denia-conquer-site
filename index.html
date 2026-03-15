@@ -3,6 +3,20 @@
   <head>
     <meta charset="UTF-8" />
 
+    <!-- =====================================================
+         SECURITY META TAGS
+         CSP here acts as a fallback for hosts that don't
+         support _headers files (e.g. non-Netlify/Vercel).
+         The stricter policy in _headers always takes precedence.
+    ====================================================== -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'"
+    />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
     <!-- Favicons con nuevo timestamp para forzar actualización en iOS -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico?v=20251022-2246" />
     <link
@@ -103,7 +117,7 @@
       content="https://gymdenia.com/gym-denia-icon-512.png?v=20251022-2246"
     />
 
-    <!-- Fonts -->
+    <!-- Fonts (preconnect reduces latency, crossorigin required for CORS font files) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
