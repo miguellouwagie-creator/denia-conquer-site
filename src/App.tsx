@@ -2,17 +2,24 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ScrollToTop from "@/components/ScrollToTop"; // Asegúrate de tener este componente o bórralo si no
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-
-// Importar páginas legales
 import LegalNotice from "./pages/legal/LegalNotice";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import CookiesPolicy from "./pages/legal/CookiesPolicy";
 
 const queryClient = new QueryClient();
+
+// Scroll to top on every route change (replaces missing ScrollToTop component)
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [pathname]);
+  return null;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -20,15 +27,12 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        {/* ScrollToTop ayuda a que al cambiar de página suba arriba */}
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
-
-          {/* Rutas Legales */}
           <Route path="/aviso-legal" element={<LegalNotice />} />
           <Route path="/privacidad" element={<PrivacyPolicy />} />
           <Route path="/cookies" element={<CookiesPolicy />} />
-
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -10,6 +10,16 @@ import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
 // ---------------------------------------------------------------------------
+// Env vars — set in .env (local) and in Netlify/Vercel dashboard (production)
+// VITE_WHATSAPP_NUMBER : digits only, e.g. 34647802493
+// VITE_PHONE_DISPLAY   : human-readable, e.g. +34 647 80 24 93
+// VITE_CONTACT_EMAIL   : e.g. gymdenia@gmail.com
+// ---------------------------------------------------------------------------
+const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER as string | undefined;
+const phoneDisplay   = import.meta.env.VITE_PHONE_DISPLAY   as string | undefined;
+const contactEmail   = import.meta.env.VITE_CONTACT_EMAIL   as string | undefined;
+
+// ---------------------------------------------------------------------------
 // Validation schema
 // ---------------------------------------------------------------------------
 const contactSchema = z.object({
@@ -17,10 +27,10 @@ const contactSchema = z.object({
     .string()
     .min(2, "El nombre debe tener al menos 2 caracteres.")
     .max(60, "El nombre no puede superar 60 caracteres.")
-    .regex(/^[a-zA-ZÀ-ÿ\s'-]+$/, "El nombre solo puede contener letras."),
+    .regex(/^[a-zA-Z\u00C0-\u00FF\s'-]+$/, "El nombre solo puede contener letras."),
   phone: z
     .string()
-    .regex(/^[\d\s+\-().]{0,20}$/, "Formato de teléfono no válido.")
+    .regex(/^[\d\s+\-().]{0,20}$/, "Formato de tel\u00e9fono no v\u00e1lido.")
     .optional()
     .or(z.literal("")),
   message: z
@@ -46,23 +56,18 @@ const Contact = () => {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [termsAccepted, setTermsAccepted] = useState(false);
 
-  // Read number from env — falls back to empty string so the button is
-  // disabled at runtime if the variable is missing, rather than crashing.
-  const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER as string | undefined;
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!termsAccepted) {
       toast({
-        title: "Atención",
-        description: "Debes aceptar la política de privacidad para enviar el mensaje.",
+        title: "Atenci\u00f3n",
+        description: "Debes aceptar la pol\u00edtica de privacidad para enviar el mensaje.",
         variant: "destructive",
       });
       return;
     }
 
-    // Validate with zod
     const result = contactSchema.safeParse(formData);
     if (!result.success) {
       const fieldErrors: FieldErrors = {};
@@ -77,8 +82,8 @@ const Contact = () => {
 
     if (!whatsappNumber) {
       toast({
-        title: "Error de configuración",
-        description: "El número de contacto no está configurado. Por favor, llámanos directamente.",
+        title: "Error de configuraci\u00f3n",
+        description: "El n\u00famero de contacto no est\u00e1 configurado. Por favor, ll\u00e1manos directamente.",
         variant: "destructive",
       });
       return;
@@ -88,7 +93,7 @@ const Contact = () => {
 
     const { name, message, phone } = result.data;
     const encodedMessage = encodeURIComponent(
-      `Hola, soy ${name}.\n\n${message}${phone ? `\n\nMi teléfono: ${phone}` : ""}`,
+      `Hola, soy ${name}.\n\n${message}${phone ? `\n\nMi tel\u00e9fono: ${phone}` : ""}`,
     );
 
     setTimeout(() => {
@@ -97,14 +102,12 @@ const Contact = () => {
         "_blank",
         "noopener,noreferrer",
       );
-
       setFormData({ name: "", phone: "", message: "" });
       setTermsAccepted(false);
       setIsSubmitting(false);
-
       toast({
         title: "Redirigiendo a WhatsApp",
-        description: "Gracias por contactar con Gym Dénia.",
+        description: "Gracias por contactar con Gym D\u00e9nia.",
       });
     }, 1000);
   };
@@ -117,7 +120,7 @@ const Contact = () => {
             Contacto
           </h2>
           <p className="text-lg text-muted-foreground">
-            Da el primer paso hacia tu transformación
+            Da el primer paso hacia tu transformaci\u00f3n
           </p>
         </div>
 
@@ -131,7 +134,7 @@ const Contact = () => {
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
-              title="Ubicación Gym Dénia"
+              title="Ubicaci\u00f3n Gym D\u00e9nia"
             />
           </div>
 
@@ -142,7 +145,6 @@ const Contact = () => {
               className="space-y-6 mb-8 bg-background/50 p-6 rounded-xl border border-primary/10"
               noValidate
             >
-              {/* Nombre */}
               <div>
                 <Label htmlFor="name">Nombre</Label>
                 <Input
@@ -162,9 +164,8 @@ const Contact = () => {
                 )}
               </div>
 
-              {/* Teléfono */}
               <div>
-                <Label htmlFor="phone">Teléfono (opcional)</Label>
+                <Label htmlFor="phone">Tel\u00e9fono (opcional)</Label>
                 <Input
                   id="phone"
                   type="tel"
@@ -182,7 +183,6 @@ const Contact = () => {
                 )}
               </div>
 
-              {/* Mensaje */}
               <div>
                 <Label htmlFor="message">Mensaje</Label>
                 <Textarea
@@ -195,7 +195,7 @@ const Contact = () => {
                   required
                   rows={4}
                   className={`mt-2 resize-none ${errors.message ? "border-destructive" : ""}`}
-                  placeholder="Cuéntanos tus objetivos..."
+                  placeholder="Cu\u00e9ntanos tus objetivos..."
                   maxLength={500}
                 />
                 <div className="flex justify-between items-center mt-1">
@@ -210,7 +210,6 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Checkbox legal */}
               <div className="flex items-start space-x-3 p-3 rounded-lg border border-border bg-background/50">
                 <Checkbox
                   id="terms"
@@ -224,15 +223,15 @@ const Contact = () => {
                   htmlFor="terms"
                   className="text-sm font-normal text-muted-foreground leading-snug cursor-pointer"
                 >
-                  He leído y acepto la{" "}
+                  He le\u00eddo y acepto la{" "}
                   <Link
                     to="/privacidad"
                     target="_blank"
                     className="text-primary hover:underline"
                   >
-                    política de privacidad
+                    pol\u00edtica de privacidad
                   </Link>
-                  . Entiendo que mis datos se usarán para responder a mi
+                  . Entiendo que mis datos se usar\u00e1n para responder a mi
                   consulta.
                 </Label>
               </div>
@@ -255,23 +254,32 @@ const Contact = () => {
             <div className="space-y-4 pt-8 border-t border-border">
               <div className="flex items-center gap-3 text-muted-foreground">
                 <MapPin className="w-5 h-5 text-primary" />
-                <span>Av. Juan Chabás, 5, 03700 Dénia</span>
+                <span>Av. Juan Chab\u00e1s, 5, 03700 D\u00e9nia</span>
               </div>
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <Phone className="w-5 h-5 text-primary" />
-                <a href="tel:+34647802493" className="hover:text-primary">
-                  +34 647 80 24 93
-                </a>
-              </div>
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <Mail className="w-5 h-5 text-primary" />
-                <a
-                  href="mailto:gymdenia@gmail.com"
-                  className="hover:text-primary"
-                >
-                  gymdenia@gmail.com
-                </a>
-              </div>
+
+              {phoneDisplay && (
+                <div className="flex items-center gap-3 text-muted-foreground">
+                  <Phone className="w-5 h-5 text-primary" />
+                  <a
+                    href={`tel:+${whatsappNumber}`}
+                    className="hover:text-primary"
+                  >
+                    {phoneDisplay}
+                  </a>
+                </div>
+              )}
+
+              {contactEmail && (
+                <div className="flex items-center gap-3 text-muted-foreground">
+                  <Mail className="w-5 h-5 text-primary" />
+                  <a
+                    href={`mailto:${contactEmail}`}
+                    className="hover:text-primary"
+                  >
+                    {contactEmail}
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>
